@@ -21,8 +21,6 @@
 >> my_sdp_structure = loadjson(sdp_json);
 
 %%
-% directory "problems" contains SDP problems in three formats, SDPA, MATLAB
-% POEMA and JSON
 
 % SDP2POEMA reads SDPA sparse format and returns POEMA Matlab structure
 % POEMA2JSON converts POEMA Matlab structure to POEMA json format
