@@ -13,7 +13,8 @@ fid = fopen(fname,'wt');
 
 fprintf(fid,'%d\n',poe.nvar);
 fprintf(fid,'%d\n',poe.constraints.nlmi);
-fprintf(fid,'%d\n',poe.constraints.msizes);
+g=sprintf('%d ', poe.constraints.msizes);
+fprintf(fid,'%s\n',g);
 g=sprintf('%d ', poe.objective);
 fprintf(fid,'%s\n',g);
 
