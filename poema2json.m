@@ -12,9 +12,9 @@ function poema2json(name);
 
 load(['problems/MATLAB_POEMA/',name]);
 
-sdp_json = savejson('name',sdp);
-fileID = fopen(['problems/JSON/',name,'.txt'],'w');
-fprintf(fileID,'%s\n',sdp_json)
+sdp_json = savejson([],sdp);
+fileID = fopen(['problems/JSON/',name,'.json'],'w');
+fprintf(fileID,'%s\n',sdp_json);
 
 
 
