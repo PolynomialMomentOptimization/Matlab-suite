@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1"><meta name="generator" content="MATLAB R2020a"><title>POEMA-MATLAB and json</title><style type="text/css">.rtcContent { padding: 30px; } .S0 { margin: 2px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
+.S1 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 28.8px; min-height: 0px; white-space: pre-wrap; color: rgb(213, 80, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 24px; font-weight: 400; text-align: left;  }
+.CodeBlock { background-color: #F7F7F7; margin: 10px 0 10px 0;}
+.S2 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 4px; padding: 6px 45px 4px 13px; line-height: 17.234px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.S3 { margin: 10px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
+.S4 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 0px none rgb(0, 0, 0); border-radius: 4px 4px 0px 0px; padding: 6px 45px 0px 13px; line-height: 17.234px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.S5 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 0px none rgb(0, 0, 0); border-radius: 0px; padding: 0px 45px 0px 13px; line-height: 17.234px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.S6 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 0px 0px 4px 4px; padding: 0px 45px 4px 13px; line-height: 17.234px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }</style></head><body><div class = rtcContent><div  class = 'S0'><span style=' font-weight: bold;'>To be able to use some of these utilities, download the Matlab toolbox "jsonlab" from </span></div><div  class = 'S0'><a href = "https://uk.mathworks.com/matlabcentral/fileexchange/33381-jsonlab-a-toolbox-to-encode-decode-json-files"><span>https://uk.mathworks.com/matlabcentral/fileexchange/33381-jsonlab-a-toolbox-to-encode-decode-json-files</span></a></div><h1  class = 'S1'><span>POEMA-MATLAB and json</span></h1><div  class = 'S0'><span style=' font-weight: bold; font-style: italic;'>savejson</span><span style=' font-style: italic;'> and </span><span style=' font-weight: bold; font-style: italic;'>loadjson</span><span style=' font-style: italic;'> are functions of toolbox </span><span style=' font-weight: bold; font-style: italic;'>jsonlab</span></div><div  class = 'S0'><span>Data for Example 1 are stored in script ex1.m:</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span style="color: rgb(178, 140, 0);">!cat ex1.m</span></span></div></div></div><div  class = 'S3'><span>To generate a POEMA-MATLAB structure including data for Example 1 call</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span>ex1     </span><span style="color: rgb(60, 118, 61);">% creates structure "sdp1"</span></span></div></div></div><div  class = 'S3'><span> To convert it into json format and write it into an ASCII file, call</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>sdp_json = savejson([],sdp1)       </span><span style="color: rgb(60, 118, 61);">%the output is a character array</span></span></div></div><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>fileID = fopen(</span><span style="color: rgb(160, 32, 240);">'myfile.json'</span><span>,</span><span style="color: rgb(160, 32, 240);">'w'</span><span>); </span><span style="color: rgb(60, 118, 61);">%opens a file in currect directory</span></span></div></div><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>fprintf(fileID,</span><span style="color: rgb(160, 32, 240);">'%s\n'</span><span>,sdp_json);   </span><span style="color: rgb(60, 118, 61);">%writes structure sdp_json in the file</span></span></div></div><div class="inlineWrapper"><div  class = 'S6'><span style="white-space: pre;"><span style="color: rgb(178, 140, 0);">!cat myfile.json</span></span></div></div></div><div  class = 'S3'><span>To read the json format from myfile.json and convert it back into a POEMA-MATLAB structure, call</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>sdp_json = fileread(</span><span style="color: rgb(160, 32, 240);">'myfile.json'</span><span>);</span></span></div></div><div class="inlineWrapper"><div  class = 'S6'><span style="white-space: pre;"><span>my_sdp_structure = loadjson(sdp_json)</span></span></div></div></div><h1  class = 'S1'><span>POEMA2SDPA</span></h1><div  class = 'S0'><span style=' font-weight: bold;'>poema2sdpa(poe, fname)</span><span> converts POEMA-MATLAB structure to SDPA format and writes it in the file "fname"</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>ex1     </span><span style="color: rgb(60, 118, 61);">% creates structure "sdp1"</span></span></div></div><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>poema2sdpa(sdp1,</span><span style="color: rgb(160, 32, 240);">'my_sdpa_file.dat-s'</span><span>);</span></span></div></div><div class="inlineWrapper"><div  class = 'S6'><span style="white-space: pre;"><span style="color: rgb(178, 140, 0);">!cat my_sdpa_file.dat-s</span></span></div></div></div><h1  class = 'S1'><span>SDPA2POEMA </span></h1><div  class = 'S0'><span style=' font-weight: bold;'>sdpa2poema(filename)</span><span> reads SDPA sparse format and returns POEMA-MATLAB structure</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span>sdp_from_sdpa = sdpa2poema(</span><span style="color: rgb(160, 32, 240);">'my_sdpa_file.dat-s'</span><span>)</span></span></div></div></div><h1  class = 'S1'><span>POEMA2SPARSE </span></h1><div  class = 'S0'><span style=' font-weight: bold;'>poema2sparse(poema_struct)</span><span> converts POEMA-MATLAB structure to sparse matrices</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>ex1     </span><span style="color: rgb(60, 118, 61);">% creates structure "sdp1"</span></span></div></div><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>sdp1_sparse = poema2sparse(sdp1)</span></span></div></div><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>sdp1_sparse.A</span></span></div></div><div class="inlineWrapper"><div  class = 'S6'><span style="white-space: pre;"><span>sdp1_sparse.A{2,1}</span></span></div></div></div></div>
+<br>
+<!-- 
+##### SOURCE BEGIN #####
+%% 
+% *To be able to use some of these utilities, download the Matlab toolbox "jsonlab" 
+% from* 
+% 
+% <https://uk.mathworks.com/matlabcentral/fileexchange/33381-jsonlab-a-toolbox-to-encode-decode-json-files 
+% https://uk.mathworks.com/matlabcentral/fileexchange/33381-jsonlab-a-toolbox-to-encode-decode-json-files>
+%% POEMA-MATLAB and json
+% _*savejson* and *loadjson* are functions of toolbox *jsonlab*_
+% 
+% Data for Example 1 are stored in script ex1.m:
+
+!cat ex1.m
+%% 
+% To generate a POEMA-MATLAB structure including data for Example 1 call
+
+ex1     % creates structure "sdp1"
+%% 
+% To convert it into json format and write it into an ASCII file, call
+
+sdp_json = savejson([],sdp1)       %the output is a character array
+fileID = fopen('myfile.json','w'); %opens a file in currect directory
+fprintf(fileID,'%s\n',sdp_json);   %writes structure sdp_json in the file
+!cat myfile.json
+%% 
+% To read the json format from myfile.json and convert it back into a POEMA-MATLAB 
+% structure, call
+
+sdp_json = fileread('myfile.json');
+my_sdp_structure = loadjson(sdp_json)
+%% POEMA2SDPA
+% *poema2sdpa(poe, fname)* converts POEMA-MATLAB structure to SDPA format and 
+% writes it in the file "fname"
+
+ex1     % creates structure "sdp1"
+poema2sdpa(sdp1,'my_sdpa_file.dat-s');
+!cat my_sdpa_file.dat-s
+%% SDPA2POEMA 
+% *sdpa2poema(filename)* reads SDPA sparse format and returns POEMA-MATLAB structure
+
+sdp_from_sdpa = sdpa2poema('my_sdpa_file.dat-s')
+%% POEMA2SPARSE 
+% *poema2sparse(poema_struct)* converts POEMA-MATLAB structure to sparse matrices
+
+ex1     % creates structure "sdp1"
+sdp1_sparse = poema2sparse(sdp1)
+sdp1_sparse.A
+sdp1_sparse.A{2,1}
+##### SOURCE END #####
+--></body></html>
