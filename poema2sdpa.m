@@ -1,5 +1,5 @@
 function poema2sdpa(poe, fname);
-%POEMA2SPARSE converts SDP POEMA Matlab structure to sparse matrices
+%POEMA2SPARSE converts SDP POEMA Matlab structure to SDPA format
 %
 % Input: SDP problem in the POEMA Matlab structure
 %        name of the SDPA file on output 
