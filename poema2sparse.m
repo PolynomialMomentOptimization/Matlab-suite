@@ -54,6 +54,7 @@ if sdpdata.type=='sdp'  %primal SDP
                 error(sprintf('Block %d have indices not matching its dim=%d.',iblk,dim));
             end
             % if i>j --> lower triangle which is not allowed
+        % zz=thisblock(3,:); thisblock(3,:) = thisblock(4,:); thisblock(4,:) = zz;
             if (any(thisblock(3,:)>thisblock(4,:)))
                 error(sprintf('Block %d have elements outside upper triangle.',iblk));
             end
@@ -94,17 +95,17 @@ if sdpdata.type=='sdp'  %primal SDP
                     thisblock(4,:)>dim))
                 error(sprintf('Block %d have indices not matching its dim=%d.',iblk,dim));
             end
-            % if i>j --> lower triangle which is not allowed
-            if (any(thisblock(3,:)>thisblock(4,:)))
-                error(sprintf('Block %d have elements outside upper triangle.',iblk));
-            end
+%             % if i>j --> lower triangle which is not allowed
+%             if (any(thisblock(3,:)>thisblock(4,:)))
+%                 error(sprintf('Block %d have elements outside upper triangle.',iblk));
+%             end
             % extract each of the matrices in this block
             for i = 0:nx
                 idx = find(thisblock(1,:)==i);
                 if (isempty(idx))
                     Avec{iblk,i+1} = sparse(dim,1);
                 else
-                    Avec{iblk,i+1} = sparse(thisblock(4,idx),thisblock(3,idx),thisblock(5,idx),dim,length(thisblock(3,idx)))
+                    Avec{iblk,i+1} = sparse(thisblock(4,idx),thisblock(3,idx),thisblock(5,idx),dim,max(thisblock(3,idx)));
                 end
             end
         end
@@ -113,9 +114,35 @@ if sdpdata.type=='sdp'  %primal SDP
     
     if alin==1
         l = poema_struct.constraints.lsi_mat;
-        sdpdata.C = sparse(l(:,2),l(:,3),l(:,1));      
+        %  sdpdata.C = sparse(l(:,2),l(:,3),l(:,1),sdpdata.nlin,nx);
+        sdpdata.C = sparse(l(:,2),l(:,3),l(:,1),nx,sdpdata.nlin);
         sdpdata.d = sparse(poema_struct.constraints.lsi_vec);
     end
+    
+    % turning double inequalities into equalities
+    ind = ones(sdpdata.nlin,1);
+    k = 2;
+    if sdpdata.nlin>0
+        while k<=sdpdata.nlin
+            if abs(sdpdata.C(:,k) + sdpdata.C(:,k-1)) <= 1e-8;
+                ind(k-1) = 2; ind(k) = 0;
+                k = k+2;
+            else
+                k = k+1;
+            end
+        end
+    end
+    
+    epsi = 0;
+    
+    if sdpdata.nlin>0
+        sdpdata.C = sdpdata.C(:,find(ind));
+        sdpdata.d= sdpdata.d(:)';
+        sdpdata.d = sdpdata.d(:,find(ind));
+        sdpdata.lsi_op = mod(ind(ind>0),2);
+        sdpdata.nlin = length(sdpdata.lsi_op);
+    end   
+    % end of this block
     
 elseif sdpdata.type=='sdp_relax'  %dual SDP_relax with ONE matrix variable!
     %%
@@ -207,7 +234,7 @@ elseif sdpdata.type=='sdp_relax'  %dual SDP_relax with ONE matrix variable!
             if (isempty(idx))
                 Avec{iblk,i+1} = sparse(dim,1);
             else
-                Avec{iblk,i+1} = sparse(thisblock(4,idx),thisblock(3,idx),thisblock(5,idx),dim,length(thisblock(3,idx)))
+                Avec{iblk,i+1} = sparse(thisblock(4,idx),thisblock(3,idx),thisblock(5,idx),dim,length(thisblock(3,idx)));
             end
         end
         sdpdata.Avec = Avec;
