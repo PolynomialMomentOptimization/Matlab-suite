@@ -1,4 +1,4 @@
-SDP data in sparse POEMA format for POP problems stored in 
+SDP data in sparse POEMA format for problems stored in 
 
 PolynomialMomentOptimization/data/json
 
