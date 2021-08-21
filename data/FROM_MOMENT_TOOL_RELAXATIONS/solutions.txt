@@ -1,0 +1,19 @@
+problem		Mosek primal obj	n	m	LMI
+======================================================
+case3sc_2	-5.694533111e+03	210	28	19
+case3sc_3	-5.694533133e+03	924	84	25
+case3sc_4	-5.694533134e+03	3003	210	25
+case14_2 	-8.081522104e+03	35960	435	49	time: 2196.12 
+motzkin_3	  no convergence	28	10	1
+motzkin_4	  no convergence	45	15	1
+robinson_3	 2.083336234e-02	84	20	1
+robinson_4	 1.515233448e-08	165	35	1
+WB2_mod2_2	-4.528641539e+02	70	15	9
+WB2_mod2_3	-4.560051838e+02	210	35	11
+WB2_mod2_4	-4.568010337e+02	495	70	11
+WB5_2		-1.146478968e+03	1001	66	19
+WB5_3		-1.146478968e+03	8008	286	31
+
+
+n .. size of vector variable
+m .. max matrix size
